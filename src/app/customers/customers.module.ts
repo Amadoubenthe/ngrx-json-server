@@ -6,6 +6,8 @@ import { CustomersComponent } from './customers.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { ListCustomerComponent } from './components/list-customer/list-customer.component';
+import { Store, StoreModule } from '@ngrx/store';
+import { customerReducer } from './store/customer.reducer';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { ListCustomerComponent } from './components/list-customer/list-customer.
   ],
   imports: [
     CommonModule,
-    CustomersRoutingModule
+    CustomersRoutingModule,
+    StoreModule.forFeature('customers', customerReducer)
   ]
 })
 export class CustomersModule { }
