@@ -13,15 +13,15 @@
     <tr>
       <td colspan="5" class="alert alert-danger">error</td>
     </tr>
-    <tr>
-    <tr *ngFor="let customer of customers" >
-      <th scope="row">{{customer.name}}</th>
+    <tr></tr>
+    <tr *ngFor="let customer of customers$ | async">
+      <th scope="row">{{ customer.name }}</th>
       <td>phone</td>
       <td>address</td>
       <td>membership</td>
       <th>
         <a (click)="editCustomer()">edit</a>
-        <br>
+        <br />
         <a (click)="deleteCustomer()">delete</a>
       </th>
     </tr>

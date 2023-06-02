@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Customer } from '../../models/customer.model';
 import { CustomerActions } from '../../store/action.types';
+import { select } from '@ngrx/store';
+import { CustomerState } from '../../store/customer.reducer';
+import { Observable } from 'rxjs';
+import { selectFeatureCustomers } from '../../store/customer.selector';
 
 @Component({
   selector: 'app-list-customer',
@@ -10,16 +14,13 @@ import { CustomerActions } from '../../store/action.types';
   styleUrls: ['./list-customer.component.scss'],
 })
 export class ListCustomerComponent implements OnInit {
-  customers!: Customer[];
-  constructor(private router: Router, private store: Store<any>) {}
+  customers$!: Observable<Customer[]>;
+  constructor(private router: Router, private store: Store<CustomerState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(CustomerActions.loadCustomer());
-    this.store.subscribe((state) => {
-      console.log('State: ', state);
 
-      this.customers = state.customers.customers;
-    });
+    this.customers$ = this.store.pipe(select(selectFeatureCustomers));
   }
 
   editCustomer(): void {
