@@ -18,7 +18,7 @@ export class ListCustomerComponent implements OnInit {
   constructor(private router: Router, private store: Store<CustomerState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(CustomerActions.loadCustomer());
+    this.store.dispatch(CustomerActions.loadCustomers());
 
     this.customers$ = this.store.pipe(select(selectFeatureCustomers));
   }

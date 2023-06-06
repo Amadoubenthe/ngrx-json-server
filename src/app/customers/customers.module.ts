@@ -11,6 +11,7 @@ import { customerReducer } from './store/customer.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomerEffects } from './store/customer.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     StoreModule.forFeature('customers', customerReducer),
     EffectsModule.forFeature(CustomerEffects),
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
 })
 export class CustomersModule {}

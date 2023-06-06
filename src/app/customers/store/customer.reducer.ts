@@ -28,24 +28,10 @@ export const initialState = customerAdapter.getInitialState(defaultCustomer);
 export const customerReducer = createReducer(
   initialState,
 
-  // on(UserActions.addUser, (state, { user }) => {
-  //   return adapter.addOne(user, state)
-  // }),
-
-  on(CustomerActions.loadCustomer, (state: CustomerState) => ({
+  on(CustomerActions.loadCustomers, (state: CustomerState) => ({
     ...state,
     loaded: true,
   })),
-
-  // on(
-  //   CustomerActions.loadCustomersSuccess,
-  //   (state: CustomerState, { customers }) => ({
-  //     ...state,
-  //     customers: customers,
-  //     loading: false,
-  //     loaded: true,
-  //   })
-  // ),
 
   on(CustomerActions.loadCustomersSuccess, (state, { customers }) => {
     return customerAdapter.setAll(customers, {
@@ -63,5 +49,21 @@ export const customerReducer = createReducer(
       loading: false,
       error: error,
     })
-  )
+  ),
+
+  // Add Customer
+  on(CustomerActions.addCustomerSuccess, (state, { customer }) => {
+    return customerAdapter.addOne(customer, {
+      ...state,
+      loaded: true,
+      loading: false,
+    });
+  }),
+
+  on(CustomerActions.addCustomerFailed, (state, { error }) => {
+    return {
+      ...state,
+      error: error,
+    };
+  })
 );

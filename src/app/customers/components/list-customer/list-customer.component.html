@@ -20,9 +20,11 @@
       <td>address</td>
       <td>membership</td>
       <th>
-        <a (click)="editCustomer()">edit</a>
-        <br />
-        <a (click)="deleteCustomer()">delete</a>
+        <div class="d-flex">
+          <div class="p-2 edit"><a (click)="editCustomer()">edit</a></div>
+
+          <div class="p-2 delete"><a (click)="deleteCustomer()">delete</a></div>
+        </div>
       </th>
     </tr>
   </tbody>
