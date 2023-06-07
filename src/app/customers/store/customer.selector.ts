@@ -24,3 +24,21 @@ export const selectFeatureError = createSelector(
   selectFeature,
   (state) => state.error
 );
+
+export const getCurrentCustomerId = createSelector(
+  selectFeature,
+  (state: CustomerState) => state.selectedCustomerId
+);
+
+export const selectCurrentUserId = createSelector(
+  selectFeature,
+  getCurrentCustomerId
+);
+
+export const getCurrentCustomer = createSelector(
+  selectFeature,
+  getCurrentCustomerId,
+  (state) => {
+    return state.entities[state.selectedCustomerId];
+  }
+);

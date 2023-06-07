@@ -11,19 +11,30 @@
   </thead>
   <tbody>
     <tr>
-      <td colspan="5" class="alert alert-danger">error</td>
+      <td colspan="5" class="alert alert-danger" *ngIf="error$ | async">
+        error
+      </td>
     </tr>
+
+    <tr class="alert alert-danger" *ngIf="loading$ | async">
+      <td colspan="5">Loading...</td>
+    </tr>
+
     <tr></tr>
     <tr *ngFor="let customer of customers$ | async">
       <th scope="row">{{ customer.name }}</th>
-      <td>phone</td>
-      <td>address</td>
-      <td>membership</td>
+      <td>{{ customer.phone }}</td>
+      <td>{{ customer.address }}</td>
+      <td>{{ customer.membership }}</td>
       <th>
         <div class="d-flex">
-          <div class="p-2 edit"><a (click)="editCustomer()">edit</a></div>
+          <div class="p-2 edit">
+            <a (click)="editCustomer(customer.id)">edit</a>
+          </div>
 
-          <div class="p-2 delete"><a (click)="deleteCustomer()">delete</a></div>
+          <div class="p-2 delete">
+            <a (click)="deleteCustomer(customer)">delete</a>
+          </div>
         </div>
       </th>
     </tr>
