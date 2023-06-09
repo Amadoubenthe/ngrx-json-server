@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -88,14 +88,22 @@ export class EditCustomerComponent implements OnInit {
     this.membershipControl = new FormControl(null, [Validators.required]);
   }
 
-  editCustomer(): void {
+  editCustomer(): any {
     const customer: Customer = {
       ...this.customerForm.value,
       id: this.id,
     };
 
-    this.store.dispatch(CustomerActions.updateCustomer({ customer: customer }));
+    this.store.dispatch(CustomerActions.updateCustomer({ customer }));
 
-    this.router.navigate(['/customers/list']);
+    this.error$ = this.store.pipe(select(selectFeatureError));
+
+    this.error$.pipe(take(1)).subscribe((error) => {
+      if (!!error) {
+        console.log('Error occurred:', !!error);
+      } else {
+        this.router.navigate(['/customers/list']);
+      }
+    });
   }
 }

@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { CustomerService } from '../services/customer.service';
 import { CustomerActions } from './action.types';
 import { Customer } from '../models/customer.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CustomerEffects {
@@ -91,6 +92,7 @@ export class CustomerEffects {
 
   constructor(
     private actions$: Actions,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private router: Router
   ) {}
 }
